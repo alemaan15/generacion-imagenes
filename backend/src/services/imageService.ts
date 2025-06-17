@@ -1,12 +1,16 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-type ImageStatus = 'processing' | 'completed' | 'failed';
+enum ImageStatusEnum {
+  PROCESSING = 'processing',
+  COMPLETED = 'completed',
+  FAILED = 'failed',
+}
 
 interface ImageTask {
   id: string;
   prompt: string;
-  status: ImageStatus;
+  status: ImageStatusEnum;
   url?: string;
 }
 
@@ -19,7 +23,7 @@ class ImageService {
     this.tasks[id] = {
       id,
       prompt,
-      status: 'processing',
+      status: ImageStatusEnum.PROCESSING,
     };
 
     // Simulación de generación de imagen (puedes cambiarlo por una API real)
@@ -29,15 +33,17 @@ class ImageService {
           responseType: 'stream', // nos aseguramos de que obtenga la imagen
         });
 
+        console.log("RESPONSE:", response);
+
         const finalUrl = response.request.res.responseUrl; // URL real de la imagen
 
         this.tasks[id] = {
           ...this.tasks[id],
-          status: 'completed',
+          status: ImageStatusEnum.COMPLETED,
           url: finalUrl,
         };
       } catch (error) {
-        this.tasks[id].status = 'failed';
+        this.tasks[id].status = ImageStatusEnum.FAILED;
       }
     }, 5000); // Espera 5 segundos como si la IA estuviera generando
 
