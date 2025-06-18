@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function SidebarLayout({
@@ -9,7 +10,9 @@ export default function SidebarLayout({
   children: React.ReactNode;
 }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const pathname = usePathname()
 
+  const isActive = (path: string) => pathname === path;
   return (
     <div className="layout">
       <aside className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
@@ -26,13 +29,13 @@ export default function SidebarLayout({
         
         </div>
         <nav className="nav">
-          <Link href="/" className="navItem">
+          <Link href="/" className={`navItem ${isActive("/") ? "active" : ""}`}>
             🎨 {!isCollapsed && "Generar imágenes"}
           </Link>
-          <Link href="/random" className="navItem">
+          <Link href="/random" className={`navItem ${isActive("/random") ? "active" : ""}`}>
             🎲 {!isCollapsed && "Número al azar"}
           </Link>
-          <Link href="/gallery" className="navItem">
+          <Link href="/gallery" className={`navItem ${isActive("/gallery") ? "active" : ""}`}>
             🖼️ {!isCollapsed && "Repositorio"}
           </Link>
         </nav>
