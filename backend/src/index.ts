@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import imageRoutes from './routes/imageRoutes';
+import imageRoutes from './routes/image.routes';
 
 const app = express();
 const PORT = 4000;
