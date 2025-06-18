@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import styles from './page.module.css';
 import { imageService, ImageStatusEnum } from "@/services/imageService";
+import Spinner from "./components/spinner/page";
 export default function Home() {
 
   const [prompt, setPrompt] = useState('')
@@ -73,16 +74,21 @@ export default function Home() {
         </button>
       </div>
 
-      {loading && <p>Generando imagen, por favor espera...</p>}
+      {loading && 
+      <div className="loading">
+        <p>Generando imagen, por favor espera...</p>
+        <Spinner />
+      </div>
+      }
 
       {imageData && (
         <div className={styles.image}>
           <img
             src={imageData.url}
             alt="Imagen generada"
-            className="max-w-xl mx-auto rounded"
+            className={styles.generatedImage}
           />
-          <div className="mt-2">
+          <div className={styles.imageActions}>
             <a
               href={imageData.url}
               download

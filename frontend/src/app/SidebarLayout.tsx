@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function SidebarLayout({
   children,
@@ -10,6 +10,13 @@ export default function SidebarLayout({
   children: React.ReactNode;
 }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const links = [
+    { name: "Generar imágenes", path: "/", icon: "🎨" },
+    { name: "Número al azar", path: "/random", icon: "🎲" },
+    { name: "Repositorio", path: "/gallery", icon: "🖼️" },
+  ]
+
   const pathname = usePathname()
 
   const isActive = (path: string) => pathname === path;
@@ -29,18 +36,21 @@ export default function SidebarLayout({
         
         </div>
         <nav className="nav">
-          <Link href="/" className={`navItem ${isActive("/") ? "active" : ""}`}>
-            🎨 {!isCollapsed && "Generar imágenes"}
-          </Link>
-          <Link href="/random" className={`navItem ${isActive("/random") ? "active" : ""}`}>
-            🎲 {!isCollapsed && "Número al azar"}
-          </Link>
-          <Link href="/gallery" className={`navItem ${isActive("/gallery") ? "active" : ""}`}>
-            🖼️ {!isCollapsed && "Repositorio"}
-          </Link>
+          {
+            links.map((link)=>{
+              return (
+                <Link
+                  key={link.name}
+                  href={link.path}
+                  className={`navItem ${isActive(link.path) ? "active" : ""}`}
+                >
+                  {link.icon} {!isCollapsed && link.name}
+                </Link>
+              )
+            })
+          }
         </nav>
       </aside>
-
       <main className="content">{children}</main>
     </div>
   );

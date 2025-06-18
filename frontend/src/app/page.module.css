@@ -56,7 +56,7 @@
   max-width: 100%;
   height: auto;
   border-radius: 12px;
-  margin: 2rem auto 1rem auto;
+  margin: 2rem auto 2rem auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
@@ -81,6 +81,33 @@
 .linkButton:hover {
   opacity: 0.7;
 }
+
+.imageWrapper {
+  max-width: 600px;
+  margin: 2rem auto 1rem auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.generatedImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.imageActions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
 
 @media (max-width: 600px) {
   .title {
