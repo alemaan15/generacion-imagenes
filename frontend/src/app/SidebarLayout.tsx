@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SidebarLayout({
   children,
@@ -10,16 +10,24 @@ export default function SidebarLayout({
   children: React.ReactNode;
 }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
-
+  const [randomNumber, setRandomNumber] = useState(0)
+  useEffect(() => {
+    //Generar un número al azar al cargar el componente
+    setRandomNumber(Math.floor(Math.random() * 100));
+  }, [])
+  
   const links = [
     { name: "Generar imágenes", path: "/", icon: "🎨" },
-    { name: "Número al azar", path: "/random", icon: "🎲" },
+    { name: "Número al azar", path: `/imagen/${randomNumber}`, icon: "🎲" },
     { name: "Repositorio", path: "/gallery", icon: "🖼️" },
   ]
 
   const pathname = usePathname()
 
-  const isActive = (path: string) => pathname === path;
+  const isActive = (path: string) => {
+    if(!path.includes("imagen")) return pathname === path;
+    else return pathname.startsWith(path) || pathname.includes("imagen");
+  };
   return (
     <div className="layout">
       <aside className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>

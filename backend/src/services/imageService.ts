@@ -33,8 +33,6 @@ class ImageService {
           responseType: 'stream', // nos aseguramos de que obtenga la imagen
         });
 
-        console.log("RESPONSE:", response);
-
         const finalUrl = response.request.res.responseUrl; // URL real de la imagen
 
         this.tasks[id] = {

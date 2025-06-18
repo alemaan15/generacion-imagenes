@@ -32,7 +32,6 @@ export default function Home() {
 
     const interval = setInterval(async () => {
       try {
-        console.log("Enregando consulta de estado para taskId:", taskId);
         const data = await imageService.getImageStatus(taskId);
         if (data.status === ImageStatusEnum.COMPLETED && data.url) {
           setImageData({ url: data.url });
