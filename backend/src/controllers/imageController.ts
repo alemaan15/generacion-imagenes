@@ -13,7 +13,6 @@ export const generateImage = (req: Request, res: Response): void => {
    res.status(200).json({ taskId: task.id });
 };
 
-// GET /api/generate-image/status/:taskId
 export const getImageStatus = (req: Request, res: Response): void => {
   const { taskId } = req.params;
 

@@ -26,14 +26,14 @@ class ImageService {
       status: ImageStatusEnum.PROCESSING,
     };
 
-    // Simulación de generación de imagen (puedes cambiarlo por una API real)
+    // Simulación de generación de imagen (cambiarlo en el futuro por una IA real)
     setTimeout(async () => {
       try {
         const response = await axios.get('https://picsum.photos/600', {
-          responseType: 'stream', // nos aseguramos de que obtenga la imagen
+          responseType: 'stream', 
         });
 
-        const finalUrl = response.request.res.responseUrl; // URL real de la imagen
+        const finalUrl = response.request.res.responseUrl;
 
         this.tasks[id] = {
           ...this.tasks[id],
@@ -43,7 +43,7 @@ class ImageService {
       } catch (error) {
         this.tasks[id].status = ImageStatusEnum.FAILED;
       }
-    }, 5000); // Espera 5 segundos como si la IA estuviera generando
+    }, 5000);
 
     return this.tasks[id];
   }

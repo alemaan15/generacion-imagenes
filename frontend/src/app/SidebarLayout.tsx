@@ -12,7 +12,6 @@ export default function SidebarLayout({
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [randomNumber, setRandomNumber] = useState(0)
   useEffect(() => {
-    //Generar un número al azar al cargar el componente
     setRandomNumber(Math.floor(Math.random() * 100));
   }, [])
   
