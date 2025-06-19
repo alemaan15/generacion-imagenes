@@ -8,7 +8,9 @@ Simula el comportamiento de una IA generadora de imágenes (como DALL·E o Stabl
 ## 📂 Estructura del proyecto
 
 generacion-imagenes/
+
 ├── frontend/ → Aplicación Next.js (React)
+
 └── backend/ → Servidor Express con TypeScript
 
 
